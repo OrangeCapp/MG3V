@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MG3V — Monte Gennaro Triple Vertical Challenge</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Mmk4ITbMEN5TEPJttJziithvvlO96ldYeks3zOz7rbr9n86vmaWfQkC2qzZOLuf3ea0RNnKyJH6fa89ayDC-dtvUaw5emHHU1y69YMJ2mFDo4rdtKFVL570qQkIl8Qw1LUQM2426DVXMozuLsQb4W2Fzh3uulcFIO9tNJa8hWU9AjMi2H7Q_aWs23UyDm_YXKPu-EBll7wiBpSQTUtq4-6JiqUztncI4TG0TWUhrRBb-xkvRvRjZ1sNejRSzZoKp_GImF9OX8tLIxjQDblVjcthn6fekDrLyoFSxs7ko6MxqMw6oLHITjK7k9Kfy09qf" charset="UTF-8"></script><style>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=C_hjvrkyZSVf9szO8QbXJ8aL9OQUNgXAGJokUBqT6ApwwI3pfUV6aegPyg0Ax8FhdyMa-H46ARc1_pwBqKxnRZsxQKXLl6Y8_dCf33sqM4N0pGtRyjPbmFCQBkT3yZAT6Lcf4QYV_NlyNoZJexPem4xs1AiW-163X0JeboTHP4Lx4K0SRZvrTebMaLyJvG-x8guLoHaZUd0urtvVniMvHfZxXaKXsqPz_tks2dltYsSq306eBsAfbjEHZ0qFdKKnNlRrjS_MpnR3VZlCPpBtYA" charset="UTF-8"></script><style>
     :root{
       --bg:#f7f3ea;
       --paper:#ffffff;
@@ -275,29 +275,6 @@
       font-size:.94rem;
     }
 
-    .comments-setup{
-      padding:14px 16px;
-      border:1px dashed var(--line);
-      border-radius:12px;
-      color:var(--muted);
-      background:rgba(255,255,255,.55);
-      font-size:.9rem;
-    }
-
-    #cusdis_thread{
-      display:flex;
-      width:100%;
-      min-height:1050px;
-      height:1050px;
-    }
-
-    #cusdis_thread iframe{
-      width:100% !important;
-      min-height:1050px !important;
-      height:1050px !important;
-      border:0 !important;
-    }
-
     .comments-note{
       margin:0 0 20px;
       padding:11px 14px;
@@ -306,6 +283,21 @@
       background:rgba(232,111,45,.08);
       color:var(--ink);
       font-size:.9rem;
+      line-height:1.55;
+    }
+
+    #HCB_comment_box{
+      width:100%;
+      min-height:420px;
+      font-family:inherit;
+      color:var(--ink);
+    }
+
+    #HCB_comment_box a{
+      color:var(--accent-dark);
+    }
+
+    #HCB_comment_box .hcb-comment-body{
       line-height:1.55;
     }
 
@@ -421,10 +413,12 @@
     <h2>Commenti <span style="font-weight:500;color:var(--muted)">/ Comments</span></h2>
     <div class="comments-card">
       <p class="comments-intro">Domande, impressioni sul percorso o aggiornamenti sulle condizioni dei sentieri? Lascia qui un commento.</p>
-      <p class="comments-note"><b>Non è necessaria alcuna registrazione.</b> I commenti vengono pubblicati dopo approvazione.</p>
-      <div id="cusdisMount">
-        <div class="comments-setup">Commenti non ancora attivi.</div>
-      </div>
+      <p class="comments-note"><b>Non è necessaria alcuna registrazione.</b> Puoi commentare direttamente qui sotto.</p>
+      <!-- begin www.htmlcommentbox.com -->
+      <div id="HCB_comment_box"><a href="https://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...</div>
+      <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+      <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%24vsZTYLw1xs7nkOFqSLD7r0"+"&opts=16798&num=10&ts=1786712182484");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+      <!-- end www.htmlcommentbox.com -->
     </div>
   </section>
 
@@ -749,31 +743,7 @@ load(RES_URL,document.querySelector('#results'),document.querySelector('#resStat
 </script>
 
 
-<script>
-(function setupCusdis(){
-  const CUSDIS_APP_ID = "6f02eb8a-dc8f-416b-9749-305bff6e4fa4";
-  const mount = document.getElementById('cusdisMount');
-  if(!mount) return;
 
-  if(!CUSDIS_APP_ID || CUSDIS_APP_ID === "INSERISCI_APP_ID_CUSDIS") return;
-
-  mount.innerHTML = '';
-  const thread = document.createElement('div');
-  thread.id = 'cusdis_thread';
-  thread.dataset.host = 'https://cusdis.com';
-  thread.dataset.appId = CUSDIS_APP_ID;
-  thread.dataset.pageId = 'mg3v-home';
-  thread.dataset.pageUrl = window.location.origin + window.location.pathname;
-  thread.dataset.pageTitle = 'MG3V — Monte Gennaro Triple Vertical Challenge';
-  mount.appendChild(thread);
-
-  const script = document.createElement('script');
-  script.async = true;
-  script.defer = true;
-  script.src = 'https://cusdis.com/js/cusdis.es.js';
-  document.body.appendChild(script);
-})();
-</script>
 
 
 
