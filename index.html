@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MG3V — Monte Gennaro Triple Vertical Challenge</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=NvypsdeEC02NHydCUqfZ-olYY-Qv7mYWJK1fkqej2V30FwWhlvcPjg_zgLlBdP-9_Sivd2GHiB7i8S0_uwB8YrcH1p5CFrO3HFekt73HvmljgpCQXVj13iMakUHPIDAadOoWHJfPyUpxyz5nZZwO-QbRdHjJEC_h04gxsgsj8uxJsFl6FCBQugNy2bDlXmuZsPPxYeIk4Z5WgFC9oHVDSSf_vTWOGwbISga11jrPaOZ6AbDoe3vJMQv1XxpVU3no0-IaUIwr9giEhKDDWDwMC3xfzXtZrnGMFC69YoQRhjfcYyzYvTle3YUUEcoz3lJ8" charset="UTF-8"></script><style>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=w48hXHuTSIPBFltcZOKX2-wyVBqf3m8iv7ZPq5zauNsPQhjcV2MK99F9fMvY_uSDp-68MCGzKtxIg01PXYwc2fZkGDk23wR1fQDb5lKjuoQKyB680aEBtDC3FD8XBLiDzd6-ISk3Loktv7HzlLDodfuLAQvbO09hgd3Y8p66z_73om96haGnePBHb4-Q0_w6kX6yCuz65T9w9niq3Eq7aOSGWdWu9nrcWpdQWEfqmLjrnOfu3hqr7B6uSOy-pHBDYK0Brhji8KqP4QqYoPSCcQ" charset="UTF-8"></script><style>
     :root{
       --bg:#f7f3ea;
       --paper:#ffffff;
@@ -257,6 +257,35 @@
     .leaflet-container{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
     .leaflet-popup-content-wrapper{border-radius:12px}
 
+
+
+    .comments-card{
+      margin-top:14px;
+      padding:20px;
+      background:linear-gradient(135deg,var(--paper),var(--paper-2));
+      border:1px solid var(--line);
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(30,45,35,.07);
+    }
+
+    .comments-intro{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:.94rem;
+    }
+
+    .comments-setup{
+      padding:14px 16px;
+      border:1px dashed var(--line);
+      border-radius:12px;
+      color:var(--muted);
+      background:rgba(255,255,255,.55);
+      font-size:.9rem;
+    }
+
+    #cusdis_thread{min-height:80px}
+
     footer{
       margin-top:46px;
       padding-top:20px;
@@ -357,6 +386,18 @@
     <p class="intro">The MG3V ranking will be based on the sum of the times recorded on the three uphill segments.</p>
     <p class="intro"><b>The challenge is open</b>: there is no deadline, and anyone who wants to take part can do so. Once you have completed it, tag <a href="https://www.strava.com/athletes/185195673">Orange Cap</a> in the description or comments of your Strava activity, and I will add your result to the ranking.</p>
     <p class="intro">Of course, what really matters is always having new opportunities to run through the hills of Monteveglio. As always, please take care both on the roads and on the trails.</p>
+  </section>
+
+
+
+  <section id="commenti">
+    <h2>Commenti <span style="font-weight:500;color:var(--muted)">/ Comments</span></h2>
+    <div class="comments-card">
+      <p class="comments-intro">Domande, impressioni sul percorso o aggiornamenti sulle condizioni dei sentieri? Lascia qui un commento.</p>
+      <div id="cusdisMount">
+        <div class="comments-setup">Commenti non ancora attivi.</div>
+      </div>
+    </div>
   </section>
 
   <footer>MG3V — Monte Gennaro Triple Vertical Challenge</footer>
@@ -678,5 +719,33 @@ load(SEG_URL,document.querySelector('#segments'),document.querySelector('#segSta
 load(RES_URL,document.querySelector('#results'),document.querySelector('#resStatus'),'Tempo MG3V',setupRecordCounter);
 
 </script>
+
+
+<script>
+(function setupCusdis(){
+  const CUSDIS_APP_ID = "6f02eb8a-dc8f-416b-9749-305bff6e4fa4";
+  const mount = document.getElementById('cusdisMount');
+  if(!mount) return;
+
+  if(!CUSDIS_APP_ID || CUSDIS_APP_ID === "INSERISCI_APP_ID_CUSDIS") return;
+
+  mount.innerHTML = '';
+  const thread = document.createElement('div');
+  thread.id = 'cusdis_thread';
+  thread.dataset.host = 'https://cusdis.com';
+  thread.dataset.appId = CUSDIS_APP_ID;
+  thread.dataset.pageId = 'mg3v-home';
+  thread.dataset.pageUrl = window.location.origin + window.location.pathname;
+  thread.dataset.pageTitle = 'MG3V — Monte Gennaro Triple Vertical Challenge';
+  mount.appendChild(thread);
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.defer = true;
+  script.src = 'https://cusdis.com/js/cusdis.es.js';
+  document.body.appendChild(script);
+})();
+</script>
+
 </body>
 </html>
