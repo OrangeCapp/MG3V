@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MG3V — Monte Gennaro Triple Vertical Challenge</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TEuXRetq4joFxp4OxoN1rgM_TgVBK_GMIajcoU97Bs58MAvCuCKccU130XaslLu1-dAmJMPy5qp_0063Hxc57MC0B0WnocdgxhRYKhIlxdeiGZQgfRLsPNTDEWzCmF5125DN1bUKrrDa5AH23HB4YmCmVIROGudngZG27OwsiGesXZnAKT5_3lLh_xiCnNIfpwn42iSAyz1lubyNp4TqW4zEHeuI5tClEvAaY21GQkJHX4b_qdXqAFfy7SfHkPk2nN2cfv4xaEEZ81iEyIQGJI-1C_4F8C-bRDAmHwEg4LsJOF2mGVxg74ZTc4wRV6mz" charset="UTF-8"></script><style>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=Mmk4ITbMEN5TEPJttJziithvvlO96ldYeks3zOz7rbr9n86vmaWfQkC2qzZOLuf3ea0RNnKyJH6fa89ayDC-dtvUaw5emHHU1y69YMJ2mFDo4rdtKFVL570qQkIl8Qw1LUQM2426DVXMozuLsQb4W2Fzh3uulcFIO9tNJa8hWU9AjMi2H7Q_aWs23UyDm_YXKPu-EBll7wiBpSQTUtq4-6JiqUztncI4TG0TWUhrRBb-xkvRvRjZ1sNejRSzZoKp_GImF9OX8tLIxjQDblVjcthn6fekDrLyoFSxs7ko6MxqMw6oLHITjK7k9Kfy09qf" charset="UTF-8"></script><style>
     :root{
       --bg:#f7f3ea;
       --paper:#ffffff;
@@ -187,7 +187,7 @@
 
     .live-counters{
       display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
+      grid-template-columns:repeat(3,minmax(0,1fr));
       gap:14px;
       margin-top:16px;
     }
@@ -384,6 +384,10 @@
       <div class="counter">
         <div class="counter-label">Tempo MG3V del primo imbattuto da</div>
         <div id="recordCounter" class="counter-value">In attesa della classifica…</div>
+      </div>
+      <div class="counter">
+        <div class="counter-label">Visualizzazioni pagina</div>
+        <div id="pageViewCounter" class="counter-value">Caricamento…</div>
       </div>
     </div>
     <p class="status">Clicca sulle intestazioni per ordinare la tabella. La classifica è ordinata inizialmente per <b>Tempo MG3V</b>.</p>
@@ -768,6 +772,48 @@ load(RES_URL,document.querySelector('#results'),document.querySelector('#resStat
   script.defer = true;
   script.src = 'https://cusdis.com/js/cusdis.es.js';
   document.body.appendChild(script);
+})();
+</script>
+
+
+
+<script data-goatcounter="https://orangecap.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>
+<script>
+(function setupVisibleGoatCounter(){
+  const el=document.getElementById('pageViewCounter');
+  if(!el) return;
+
+  let attempts=0;
+  const waitForGoatCounter=setInterval(()=>{
+    attempts++;
+    if(window.goatcounter && typeof window.goatcounter.get_data==='function'){
+      clearInterval(waitForGoatCounter);
+
+      const refresh=async()=>{
+        try{
+          const data=window.goatcounter.get_data();
+          const path=(data && data.p) ? data.p : (window.location.pathname || '/');
+          const url='https://orangecap.goatcounter.com/counter/'+encodeURIComponent(path)+'.json';
+          const response=await fetch(url,{cache:'no-store'});
+          if(!response.ok) throw new Error('GoatCounter public counter unavailable');
+          const stats=await response.json();
+          el.textContent=stats && stats.count ? stats.count : '0';
+        }catch(err){
+          el.textContent='Non disponibile';
+          el.title='Abilita “Allow adding visitor counts on your website” nelle impostazioni GoatCounter.';
+        }
+      };
+
+      // Lascia a count.js il tempo di registrare questa visualizzazione prima
+      // di leggere il totale, poi aggiorna periodicamente il numero mostrato.
+      setTimeout(refresh,900);
+      setInterval(refresh,60000);
+    }else if(attempts>=100){
+      clearInterval(waitForGoatCounter);
+      el.textContent='Non disponibile';
+    }
+  },100);
 })();
 </script>
 
