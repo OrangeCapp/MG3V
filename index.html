@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MG3V — Monte Gennaro Triple Vertical Challenge</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=w48hXHuTSIPBFltcZOKX2-wyVBqf3m8iv7ZPq5zauNsPQhjcV2MK99F9fMvY_uSDp-68MCGzKtxIg01PXYwc2fZkGDk23wR1fQDb5lKjuoQKyB680aEBtDC3FD8XBLiDzd6-ISk3Loktv7HzlLDodfuLAQvbO09hgd3Y8p66z_73om96haGnePBHb4-Q0_w6kX6yCuz65T9w9niq3Eq7aOSGWdWu9nrcWpdQWEfqmLjrnOfu3hqr7B6uSOy-pHBDYK0Brhji8KqP4QqYoPSCcQ" charset="UTF-8"></script><style>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=TEuXRetq4joFxp4OxoN1rgM_TgVBK_GMIajcoU97Bs58MAvCuCKccU130XaslLu1-dAmJMPy5qp_0063Hxc57MC0B0WnocdgxhRYKhIlxdeiGZQgfRLsPNTDEWzCmF5125DN1bUKrrDa5AH23HB4YmCmVIROGudngZG27OwsiGesXZnAKT5_3lLh_xiCnNIfpwn42iSAyz1lubyNp4TqW4zEHeuI5tClEvAaY21GQkJHX4b_qdXqAFfy7SfHkPk2nN2cfv4xaEEZ81iEyIQGJI-1C_4F8C-bRDAmHwEg4LsJOF2mGVxg74ZTc4wRV6mz" charset="UTF-8"></script><style>
     :root{
       --bg:#f7f3ea;
       --paper:#ffffff;
@@ -284,7 +284,30 @@
       font-size:.9rem;
     }
 
-    #cusdis_thread{min-height:80px}
+    #cusdis_thread{
+      display:flex;
+      width:100%;
+      min-height:1050px;
+      height:1050px;
+    }
+
+    #cusdis_thread iframe{
+      width:100% !important;
+      min-height:1050px !important;
+      height:1050px !important;
+      border:0 !important;
+    }
+
+    .comments-note{
+      margin:0 0 20px;
+      padding:11px 14px;
+      border-left:4px solid var(--accent);
+      border-radius:8px;
+      background:rgba(232,111,45,.08);
+      color:var(--ink);
+      font-size:.9rem;
+      line-height:1.55;
+    }
 
     footer{
       margin-top:46px;
@@ -394,6 +417,7 @@
     <h2>Commenti <span style="font-weight:500;color:var(--muted)">/ Comments</span></h2>
     <div class="comments-card">
       <p class="comments-intro">Domande, impressioni sul percorso o aggiornamenti sulle condizioni dei sentieri? Lascia qui un commento.</p>
+      <p class="comments-note"><b>Non è necessaria alcuna registrazione.</b> I commenti vengono pubblicati dopo approvazione.</p>
       <div id="cusdisMount">
         <div class="comments-setup">Commenti non ancora attivi.</div>
       </div>
